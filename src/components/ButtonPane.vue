@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { Commands, Command } from '../mixins/Commands'
+import { Commands, Command } from '../api/Commands'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
     @Component

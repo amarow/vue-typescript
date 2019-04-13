@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Table } from 'element-ui'
-import { Columns } from '@/mixins/Columns'
+import { Columns } from '@/api/Columns'
 
     @Component
 export default class ListPane<T> extends Vue {

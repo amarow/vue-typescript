@@ -2,27 +2,27 @@
     <div>
         <el-form :label-position="labelPosition" size="mini" :model="model">
             <el-row v-for="row in form.rows" :key="row.count" :gutter="gutter">
-                <el-col v-for="input in row.configs" :span="input.span" :offset="input.offset" :key="input.key">
-                    <el-form-item :label="input.getLabel()" :style="'margin-bottom:'+input.bottomSpace+';'"
-                                  :label-width="input.getLabelWidth()">
-                        <el-input v-if="input.type=='text'" v-model="model[input.key]"
-                                  :placeholder="input.placeHolder"/>
-                        <el-input v-if="input.type=='area'" v-model="model[input.key]" :placeholder="input.placeHolder"
+                <el-col v-for="config in row.configs" :span="config.span" :offset="config.offset" :key="config.key">
+                    <el-form-item :label="config.getLabel()" :style="'margin-bottom:'+config.bottomSpace+';'"
+                                  :label-width="config.getLabelWidth()">
+                        <el-input v-if="config.type=='text'" v-model="model[config.key]"
+                                  :placeholder="config.placeHolder"/>
+                        <el-input v-if="config.type=='area'" v-model="model[config.key]" :placeholder="config.placeHolder"
                                   type="textarea"/>
-                        <el-checkbox v-else-if="input.type=='boolean'" v-model="model[input.key]"
-                                     :label="input.getCheckboxLabel()"/>
-                        <proxy-field v-else-if="input.type=='lookup'" v-model="model[input.key]"
-                                     :placeholder="input.placeHolder" :table="input.table" :columns="input.columns"/>
-                        <list-pane v-else-if="input.type=='list'" :table="input.table" :columns="input.columns"
+                        <el-checkbox v-else-if="config.type=='boolean'" v-model="model[config.key]"
+                                     :label="config.getCheckboxLabel()"/>
+                        <proxy-field v-else-if="config.type=='lookup'" v-model="model[config.key]"
+                                     :placeholder="config.placeHolder" :table="config.table" :columns="config.columns" :valueColumn="config.key"/>
+                        <list-pane v-else-if="config.type=='list'" :table="config.table" :columns="config.columns"
                                    filter-text=""/>
-                        <el-date-picker v-else-if="input.type=='date'" v-model="model[input.key]"
-                                        :placeholder="input.placeHolder" style="width:100%;"/>
-                        <el-select v-else-if="input.type=='select'" v-model="model[input.key]"
-                                   :placeholder="input.placeHolder" filterable style="width:100%;">
-                            <el-option v-for="row in input.table" :key="input.table.indexOf(row)" :label="row.guiRep()"
+                        <el-date-picker v-else-if="config.type=='date'" v-model="model[config.key]"
+                                        :placeholder="config.placeHolder" style="width:100%;"/>
+                        <el-select v-else-if="config.type=='select'" v-model="model[config.key]"
+                                   :placeholder="config.placeHolder" filterable style="width:100%;">
+                            <el-option v-for="row in config.table" :key="config.table.indexOf(row)" :label="row.guiRep()"
                                        :value="row.guiRep()"></el-option>
                         </el-select>
-                        <hr v-else-if="input.type=='hr'"/>
+                        <hr v-else-if="config.type=='hr'"/>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -33,7 +33,7 @@
 <script lang="ts">
 import ProxyField from './ProxyField.vue'
 import ListPane from './ListPane.vue'
-import { Form } from '../mixins/Form'
+import { Form } from '../api/Form'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
     @Component({

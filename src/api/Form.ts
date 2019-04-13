@@ -1,4 +1,4 @@
-import { Columns } from '@/mixins/Columns'
+import { Columns } from '@/api/Columns'
 
 export class ComponentConfig {
     labelWidth = '7em';
@@ -7,6 +7,7 @@ export class ComponentConfig {
     span: number = 2;
     offset: number = 0;
     type: string = 'text';
+    valueColumn= 'id';
     placeHolder: string = '';
     bottomSpace!: string;
     table!: Object;
@@ -15,6 +16,11 @@ export class ComponentConfig {
 
     withSpan (span: number): ComponentConfig {
       this.span = span
+      return this
+    }
+
+    withValueColumn (valueColumn:string): ComponentConfig {
+      this.valueColumn = valueColumn
       return this
     }
 

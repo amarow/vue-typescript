@@ -4,7 +4,7 @@
                 :table="table"
                 :columns="columns"
                 :filter-text="inputValue"
-                @onSelectionChanged="listSelectionChanged"
+                :onSelectionChanged="listSelectionChanged"
         />
         <el-input slot="reference" v-model="inputValue" prefix-icon="el-icon-search" placeholder="search"/>
     </el-popover>
@@ -12,33 +12,34 @@
 
 <script lang="ts">
 import ListPane from './ListPane.vue'
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import { Columns } from '@/mixins/Columns'
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Columns } from '@/api/Columns'
 
-    @Component({
-      components: { ListPane }
-    })
+@Component({
+  components: { ListPane }
+})
 export default class ProxyField<T> extends Vue {
         @Prop() table: any;
         @Prop() columns!: Columns;
         @Prop() value!: T;
+        @Prop() valueColumn!: string;
 
-        private _inputValue = '';
+        myInputValue = '';
         visible = false;
 
         listSelectionChanged (selection: T) {
           if (selection) {
-            this._inputValue = selection.guiRep()
-            this.visible = false
+            this.inputValue = selection[this.valueColumn]
           }
+          this.visible = false
         }
 
         get inputValue (): string {
-          return this._inputValue
+          return this.myInputValue
         }
 
         set inputValue (value: string) {
-          this._inputValue = value
+          this.myInputValue = value
           this.$emit('input', value)
         }
 }

@@ -20,9 +20,9 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import { Command, Commands } from './mixins/Commands'
-import { Columns } from '@/mixins/Columns'
-import { Form } from '@/mixins/Form'
+import { Command, Commands } from './api/Commands'
+import { Columns } from '@/api/Columns'
+import { Form } from '@/api/Form'
 import { Person, PersonService } from './services/Person'
 import { AdressService } from './services/Adress'
 
@@ -56,7 +56,8 @@ export default class App extends Controller<Person> {
       form.newRow()
         .hr('Adress').withSpan(24).build()
         .textInput('First').build()
-        .lookup('Second').withTable(PersonService.createPersons(10))
+        .lookup('Second')
+        .withTable(PersonService.createPersons(10))
         .withColumns(Columns.create()
           .add('Id').center().build()
           .add('First').sort(false).build()
