@@ -12,7 +12,7 @@
                         <el-checkbox v-else-if="config.type=='boolean'" v-model="model[config.key]"
                                      :label="config.getCheckboxLabel()"/>
                         <proxy-field v-else-if="config.type=='lookup'" v-model="model[config.key]"
-                                     :placeholder="config.placeHolder" :table="config.table" :columns="config.columns" :valueColumn="config.key"/>
+                                     :placeholder="config.placeHolder" :table="config.table" :columns="config.columns" :resultColumn="config.resultColumn"/>
                         <list-pane v-else-if="config.type=='list'" :table="config.table" :columns="config.columns"
                                    filter-text=""/>
                         <el-date-picker v-else-if="config.type=='date'" v-model="model[config.key]"

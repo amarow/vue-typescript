@@ -22,14 +22,14 @@ export default class ProxyField<T> extends Vue {
         @Prop() table: any;
         @Prop() columns!: Columns;
         @Prop() value!: T;
-        @Prop() valueColumn!: string;
+        @Prop() resultColumn!: string;
 
         myInputValue = '';
         visible = false;
 
         listSelectionChanged (selection: T) {
           if (selection) {
-            this.inputValue = selection[this.valueColumn]
+            this.inputValue = selection[this.resultColumn]
           }
           this.visible = false
         }

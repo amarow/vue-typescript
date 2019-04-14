@@ -22,7 +22,7 @@
 import { Component } from 'vue-property-decorator'
 import { Command, Commands } from './api/Commands'
 import { Columns } from '@/api/Columns'
-import { Form } from '@/api/Form'
+import { Form , ComponentConfig} from '@/api/Form'
 import { Person, PersonService } from './services/Person'
 import { AdressService } from './services/Adress'
 
@@ -62,6 +62,7 @@ export default class App extends Controller<Person> {
           .add('Id').center().build()
           .add('First').sort(false).build()
           .add('Second').sort(false).build())
+        .withResultColumn('second')
       form.newRow()
         .textInput('City').build()
         .textInput('Street').build()

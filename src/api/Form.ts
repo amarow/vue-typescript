@@ -7,7 +7,7 @@ export class ComponentConfig {
     span: number = 2;
     offset: number = 0;
     type: string = 'text';
-    valueColumn= 'id';
+    resultColumn= 'id';
     placeHolder: string = '';
     bottomSpace!: string;
     table!: Object;
@@ -19,13 +19,13 @@ export class ComponentConfig {
       return this
     }
 
-    withValueColumn (valueColumn:string): ComponentConfig {
-      this.valueColumn = valueColumn
+    withTable (table: any): ComponentConfig {
+      this.table = table
       return this
     }
 
-    withTable (table: any): ComponentConfig {
-      this.table = table
+    withResultColumn (resultColumn : string): ComponentConfig {
+      this.resultColumn = resultColumn
       return this
     }
 
